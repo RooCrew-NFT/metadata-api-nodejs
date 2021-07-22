@@ -3,8 +3,11 @@ const path = require('path')
 const moment = require('moment')
 const { HOST } = require('./src/constants')
 const db = require('./src/database')
+const db_fake = require('./src/database-fake')
 
 const PORT = process.env.PORT || 5000
+
+var supply = 3;
 
 const app = express()
   .set('port', PORT)
@@ -19,22 +22,41 @@ app.get('/', function(req, res) {
 })
 
 app.get('/api/token/:token_id', function(req, res) {
-  const tokenId = parseInt(req.params.token_id).toString()
-  const person = db[tokenId]
-  const bdayParts = person.birthday.split(' ')
-  const day = parseInt(bdayParts[1])
-  const month = parseInt(bdayParts[0])
-  const data = {
-    'name': person.name,
-    'attributes': {
-      'birthday': person.birthday,
-      'birth month': monthName(month),
-      'zodiac sign': zodiac(day, month),
-      // 'age': moment().diff(person.birthday, 'years')
-    },
-    'image': `${HOST}/images/${tokenId}.png`
+  if (parseInt(req.params.token_id) <= supply) {
+	  const tokenId = parseInt(req.params.token_id).toString()
+	  const person = db[tokenId]
+	  const bdayParts = person.birthday.split(' ')
+	  const day = parseInt(bdayParts[1])
+	  const month = parseInt(bdayParts[0])
+	  const data = {
+		'name': person.name,
+		'attributes': {
+		  'birthday': person.birthday,
+		  'birth month': monthName(month),
+		  'zodiac sign': zodiac(day, month),
+		  // 'age': moment().diff(person.birthday, 'years')
+		},
+		'image': `${HOST}/images/${tokenId}.png`
+	  }
+  	res.send(data)
+  } else {
+  	const tokenId = parseInt(req.params.token_id).toString()
+	const person = db_fake[1]
+	const bdayparts = person.birthday.split(' ')
+	const day = parseInt(bdayParts[1])
+	const month = parseInt(bdayParts[0])
+	const data = {
+		'name': person.name,
+		'attributes': {
+		  'birthday': person.birthday,
+		  'birth month': monthName(month),
+		  'zodiac sign': zodiac(day, month),
+		  // 'age': moment().diff(person.birthday, 'years')
+		},
+		'image': `https://ipfs.io/ipfs/QmdbkLGih7EzRUnnMBFUgjoUWFibCKcJrj4ZAbJ8vjrfDR/image.png`
+  	}
+  	res.send(data)
   }
-  res.send(data)
 })
 
 app.listen(app.get('port'), function() {
