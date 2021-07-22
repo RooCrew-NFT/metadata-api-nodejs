@@ -42,7 +42,7 @@ app.get('/api/token/:token_id', function(req, res) {
   } else {
   	const tokenId = parseInt(req.params.token_id).toString()
 	const person = db_fake[1]
-	const bdayparts = person.birthday.split(' ')
+	const bdayParts = person.birthday.split(' ')
 	const day = parseInt(bdayParts[1])
 	const month = parseInt(bdayParts[0])
 	const data = {
