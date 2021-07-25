@@ -42,5 +42,17 @@ module.exports = {
   "11": {
     "name": "Guino the Penguin",
     "birthday": "03-09"
+  },
+  "12": {
+    "name": "Guino the Penguin",
+    "birthday": "03-09"
+  },
+  "13": {
+    "name": "Guino the Penguin",
+    "birthday": "03-09"
+  },
+  "14": {
+    "name": "Guino the Penguin",
+    "birthday": "03-09"
   }
 }
