@@ -9,7 +9,7 @@ const RooCrew = require('./src/RooCrewABI.json')
 
 const PORT = process.env.PORT || 5000
 
-const address = "0xCAff43B36f011bCf6dc6234Dd56B786fc9a72377";
+const address = "0xcB9A0de0dA98Be54dcfbB28A9D739b649B19C135";
 
 const web3 = new Web3("https://eth-rinkeby.alchemyapi.io/v2/su5-8Reiyu3oQS6590yr3o-oy6FWNnha");
 
